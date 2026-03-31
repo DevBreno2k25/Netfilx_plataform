@@ -8,15 +8,15 @@
 
 /* Importa dados com catálogos personalizados por perfil */
 import { catalogosPorPerfil, getCatalogoPorPerfil } from './data.js';
-/* Importa função para criar carrosséis */
-import { createCarousel } from './components/Carousel.js';
+/* Importa função para criar carrosséis (arquivo está em mesma pasta) */
+import { createCarousel } from './Carousel.js';
 
 /* ====================== INICIALIZAÇÃO DA PÁGINA ==================
    Aguarda o DOM estar completamente carregado antes de executar
    ============================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    /* Recupera nome do perfil salvo no localStorage */
-    const nomePerfil = localStorage.getItem('perfilAtivoNome');
+    /* Recupera nome do perfil salvo no localStorage (fallback para 'Ana') */
+    const nomePerfil = localStorage.getItem('perfilAtivoNome') || 'Ana';
     /* Recupera URL da imagem do perfil salvo no localStorage */
     const imagemPerfil = localStorage.getItem('perfilAtivoImagem');
 
