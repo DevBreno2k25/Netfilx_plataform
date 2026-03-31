@@ -9,7 +9,7 @@
    ================================================================ */
 
 /* Importa funções utilitárias de manipulação de dados */
-import { getYouTubeId, getRandomMatchScore, getRandomDuration, getRandomAgeBadge } from '../utils.js';
+import { getYouTubeId, getRandomMatchScore, getRandomDuration, getRandomAgeBadge } from './utils.js';
 
 /**
  * Cria um elemento de cartão de filme/série completo com interações
