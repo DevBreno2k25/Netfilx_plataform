@@ -94,6 +94,16 @@ class ProfileManager {
         localStorage.setItem('perfilAtivoNome', nomePerfil);
         localStorage.setItem('perfilAtivoImagem', imagemPerfil);
         
+        // Antes de navegar para catalogo, garantimos que o armazenamento foi concluído.
+        // Em navegadores modernos setItem é síncrono, mas prevenimos eventuais problemas
+        // cancelando o comportamento padrão e redirecionando manualmente.
+        const link = event.currentTarget;
+        event.preventDefault();
+        // pequena timeout para garantir que localStorage seja persistido visualmente
+        setTimeout(() => {
+            window.location.href = link.href;
+        }, 50);
+         
         // Log para debug (opcional, remova se não quiser)
         console.log(`Perfil ativo: ${nomePerfil}`);
         console.log(`Imagem: ${imagemPerfil}`);
