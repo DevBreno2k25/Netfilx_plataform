@@ -1,0 +1,669 @@
+/* ================================================================
+   NETFLIX CLONE - Estilos CSS
+   Define cores, tipografia, layout e animações da plataforma
+   ================================================================ */
+
+/* ====================== VARIÁVEIS CSS ============================
+   Define cores principais reutilizáveis em toda a aplicação
+   ============================================================== */
+:root {
+    /* Vermelho característico da Netflix */
+    --netflix-red: #E50914;
+    /* Fundo escuro padrão */
+    --dark-bg: #141414;
+    /* Cor do texto principal */
+    --text-color: #ffffff;
+}
+
+/* ====================== RESET DE ESTILOS =========================
+   Remove espaçamentos padrão e aplica box-sizing em tudo
+   ============================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ====================== ESTILOS DO BODY ===========================
+   Aplica tipografia e cores globais da página
+   ============================================================== */
+body {
+    /* Fonte principal: Roboto com fallbacks */
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Usa a cor de fundo definida em :root */
+    background-color: var(--dark-bg);
+    /* Cor do texto padrão */
+    color: var(--text-color);
+    /* Remove scroll horizontal para evitar distorções */
+    overflow-x: hidden;
+}
+
+/* ====================== ESTILOS DE LINKS ===========================
+   Define aparência padrão e efeito hover dos links
+   ============================================================== */
+a {
+    /* Remove sublinhado dos links */
+    text-decoration: none;
+    /* Cor padrão dos links */
+    color: #e5e5e5;
+    /* Anima a mudança de cor em 0.3 segundos */
+    transition: color 0.3s;
+}
+
+/* Estado hover dos links: mais claros */
+a:hover {
+    color: #b3b3b3;
+}
+
+/* ====================== BARRA DE NAVEGAÇÃO =======================
+   Estilos da navbar fixa no topo com logo e menu
+   ============================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    height: 70px;
+    z-index: 1000;
+    background-color: var(--dark-bg);
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 92px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+}
+
+.nav-links .active {
+    font-weight: bold;
+    color: white;
+}
+
+.icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.kids-link {
+    font-size: 14px;
+}
+
+.nav-notification {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: var(--netflix-red);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 32px;
+    border-radius: 4px;
+}
+
+/* ====================== CONTAINER DE CARROSSÉIS ==================
+   Define padding e posicionamento do conteúdo principal
+   ============================================================== */
+.sliders-container {
+    padding: 0 4%;
+    padding-top: 100px;
+    /* Space for navbar */
+    position: relative;
+    z-index: 3;
+    padding-bottom: 100px;
+}
+
+.slider-section {
+    margin-bottom: 3.5vw;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+.slider-title {
+    font-size: 1.25vw;
+    font-weight: bold;
+    color: #e5e5e5;
+    line-height: 1.25vw;
+}
+
+.slider-indicators {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 4px;
+}
+
+.slider-indicators div {
+    width: 12px;
+    height: 2px;
+    background-color: #4d4d4d;
+}
+
+.slider-indicators div.active {
+    background-color: #aaa;
+}
+
+.movie-row {
+    display: flex;
+    gap: 8px;
+    /* Small gap between movie cards */
+    overflow-x: visible;
+    /* Let the expanded cards paint outside this box vertically */
+    padding: 10px 4% 50px 4%;
+    /* Added bottom padding to hold the expanding modal */
+    margin: 0 -4%;
+    /* Pull edges back out so we don't double up padding from container */
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.movie-row::-webkit-scrollbar {
+    /* Oculta scrollbar do navegador Chrome/Safari */
+    display: none;
+}
+
+/* ====================== CARTÕES DE FILME ===========================
+   Define aparência e animações dos cartões de filmes/séries
+   ============================================================== */
+.movie-card {
+    /* Tamanho fixo do cartão */
+    min-width: 250px;
+    width: 250px;
+    height: 140px;
+    /* Cor de fundo escura */
+    background-color: #222;
+    /* Bordas arredondadas */
+    border-radius: 4px;
+    /* Cursor de apontador ao passar o mouse */
+    cursor: pointer;
+    /* Anima múltiplas propriedades com timing diferente */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s, border-radius 0.3s 0s, z-index 0s 0.3s, box-shadow 0.3s 0s;
+    position: relative;
+    z-index: 1;
+    /* Define origem padrão da transformação */
+    transform-origin: center center;
+}
+
+/* ====================== MODIFICADORES DE ORIGEM ===================
+   Aplicados pelo JavaScript para evitar cortes nas bordas
+   ============================================================== */
+/* Quando o cartão está na borda esquerda */
+.movie-card.origin-left {
+    transform-origin: left center;
+}
+
+/* Quando o cartão está na borda direita */
+.movie-card.origin-right {
+    transform-origin: right center;
+}
+
+/* ====================== EFEITO HOVER CARDS =======================
+   Amplia o cartão ao passar o mouse para preview interativo
+   ============================================================== */
+.movie-card:hover {
+    /* Aumenta tamanho em 60% e move um pouco para cima */
+    transform: scale(1.6) translateY(-5%);
+    /* Coloca o cartão acima dos outros */
+    z-index: 99;
+    border-radius: 6px;
+    /* Sombra para dar profundidade ao cartão expandido */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    /* Animação com delay para suavidade */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s, border-radius 0.3s 0.6s, box-shadow 0.3s 0.6s, z-index 0s 0s;
+}
+
+/* ====================== IMAGEM DO CARTÃO ========================= */
+.movie-card img {
+    /* Posiciona a imagem para cobrir todo o cartão */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Garante que a imagem cubra sem distorção */
+    object-fit: cover;
+    /* Bordas arredondadas como o cartão */
+    border-radius: 4px;
+    /* Anima mudanças de opacidade e bordas */
+    transition: opacity 0.3s ease, border-radius 0.3s;
+    /* Camada acima do iframe padrão */
+    z-index: 2;
+}
+
+/* ====================== IFRAME PARA VÍDEO ======================== */
+.movie-card iframe {
+    /* Posiciona o iframe para cobrir todo o cartão */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Inicialmente invisível até o vídeo carregar */
+    opacity: 0;
+    /* Bordas arredondadas */
+    border-radius: 4px;
+    /* Anima opacidade e bordas */
+    transition: opacity 0.3s ease, border-radius 0.3s;
+    /* Desabilita cliques no iframe quando invisível */
+    pointer-events: none;
+    /* Camada padrão abaixo da imagem */
+    z-index: 1;
+}
+
+/* Estado "playing" do iframe: mostra o vídeo */
+.movie-card iframe.playing {
+    /* Mostra o vídeo */
+    opacity: 1;
+    /* Coloca acima de imagem e detalhes */
+    z-index: 3;
+    /* Arredonda apenas a parte superior (detalhes ficam embaixo) */
+    border-radius: 6px 6px 0 0;
+}
+
+/* Aparência da imagem quando hover */
+.movie-card:hover img {
+    /* Arredonda apenas a parte superior */
+    border-radius: 6px 6px 0 0;
+    /* Delay para escondá-la após o vídeo aparecer */
+    transition: border-radius 0s 0.6s;
+}
+
+/* Oculta imagem quando o vídeo está tocando */
+.movie-card img.playing-video {
+    opacity: 0;
+}
+
+/* ====================== DETALHES DO CARTÃO ======================== */
+/* Modal com informações que aparece ao expandir */
+.card-details {
+    /* Posiciona logo abaixo do cartão */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    /* Fundo escuro ligeiramente diferente */
+    background-color: #181818;
+    /* Arredonda apenas a parte inferior */
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    /* Espaçamento interno */
+    padding: 18px 16px;
+    /* Inicialmente invisível */
+    opacity: 0;
+    visibility: hidden;
+    /* Anima opacidade com delay */
+    transition: opacity 0.3s 0s, visibility 0.3s 0s;
+    /* Sombra para destaque */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
+    /* Layout em coluna */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 2;
+    cursor: default;
+}
+
+/* Mostra detalhes ao fazer hover no cartão */
+.movie-card:hover .card-details {
+    /* Mostra o modal */
+    opacity: 1;
+    visibility: visible;
+    /* Anima com delay após expandir */
+    transition: opacity 0.2s 0.6s, visibility 0s 0.6s;
+}
+
+/* ====================== BOTÕES DE AÇÃO ======================== */
+.details-buttons {
+    /* Distribui botões entre as extremidades */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Grupos de botões */
+.left-buttons,
+.right-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* ====================== BOTÕES CIÓNICOS ==========================
+   Botões redondos com ícones (play, +, like, etc)
+   ============================================================== */
+.btn-icon {
+    /* Tamanho do botão */
+    width: 32px;
+    height: 32px;
+    /* Forma circular */
+    border-radius: 50%;
+    /* Fundo semi-transparente */
+    background-color: #2b2b2b;
+    /* Borda clara */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    /* Centraliza ícone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    /* Anima cores ao hover */
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Efeito hover dos botões */
+.btn-icon:hover {
+    /* Borda mais clara */
+    border-color: white;
+    /* Fundo mais claro */
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ====================== BOTÃO PLAY ================================ */
+.btn-play-icon {
+    /* Fundo branco e texto preto para destaque */
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+/* Hover do botão play */
+.btn-play-icon:hover {
+    background-color: #e6e6e6;
+}
+
+/* Ajusta espaçamento do ícone play */
+.btn-play-icon i {
+    margin-left: 2px;
+}
+
+/* ====================== INFORMAÇÕES DO DETALHES ==================
+   Exibe score, classificação etária, duração e resolução
+   ============================================================== */
+.details-info {
+    /* Alinha todos os itens em uma linha */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Score de compatibilidade (verde) */
+.match-score {
+    color: #46d369;
+}
+
+/* Badge de classificação etária */
+.age-badge {
+    /* Fundo transparente com borda */
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-family: Arial, sans-serif;
+}
+
+/* Versão vermelha do badge (A16) */
+.age-badge.red-accent {
+    background-color: #d32f2f;
+    border: none;
+    font-weight: bold;
+}
+
+/* Duração do conteúdo */
+.duration {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Badge de resolução (HD, 4K) */
+.resolution {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 1px 3px;
+    border-radius: 2px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ====================== TAGS/GÈNEROS ============================
+   Exibe gêneros e categorias do conteúdo
+   ============================================================== */
+.details-tags {
+    /* Alinha tags em linha */
+    display: flex;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 4px;
+}
+
+/* Adiciona separador visual entre tags */
+.details-tags span:not(:last-child)::after {
+    content: "•";
+    color: #666;
+    margin-left: 6px;
+}
+
+/* ====================== BADGES DE DESTAQUE ========================
+   Badge "Top 10" e badges customizados
+   ============================================================== */
+.badge-top10 {
+    /* Posiciona no canto superior direito */
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Tamanho do badge */
+    width: 22px;
+    height: 28px;
+    /* Fundo vermelho Netflix */
+    background-color: var(--netflix-red);
+    color: white;
+    /* Centraliza conteúdo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    z-index: 4;
+    /* Arredonda apenas a parte inferior (canto) */
+    border-bottom-left-radius: 2px;
+    /* Sombra para destaque */
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Fonte para estilo Netflix */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Texto "TOP" do badge */
+.badge-top10 span.top {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+    line-height: 8px;
+}
+
+/* Número do ranking */
+.badge-top10 span.number {
+    font-size: 13px;
+    line-height: 13px;
+}
+
+/* Badge inferior (Novo, Bombando, etc) */
+.badge-bottom {
+    /* Posiciona na parte inferior, centralizado */
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 4px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 2px;
+    z-index: 4;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Ajusta posição quando há barra de progresso */
+.movie-card.has-progress .badge-bottom {
+    bottom: 12px;
+}
+
+/* Versão vermelha do badge */
+.badge-bottom.red {
+    background-color: var(--netflix-red);
+    color: white;
+}
+
+/* Versão branca do badge */
+.badge-bottom.white {
+    background-color: white;
+    color: black;
+}
+
+/* ====================== BARRA DE PROGRESSO ============================
+   Mostra progresso de visualização do conteúdo
+   ============================================================== */
+.progress-bar-container {
+    /* Posiciona na parte inferior do cartão */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Altura fina */
+    height: 4px;
+    /* Fundo escuro semi-transparente */
+    background-color: rgba(100, 100, 100, 0.7);
+    z-index: 5;
+    /* Bordas arredondadas na parte inferior */
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+/* Barra preenchida com progresso */
+.progress-value {
+    height: 100%;
+    /* Cor vermelha Netflix */
+    background-color: var(--netflix-red);
+    border-bottom-left-radius: 4px;
+}
+
+/* ====================== RESPONSIVIDADE MÓVEL =====================
+   Ajusta layout para telas pequenas
+   ============================================================== */
+@media (max-width: 768px) {
+    /* Oculta menu de navegação em móvel */
+    .nav-links {
+        display: none;
+    }
+
+    /* Reduz tamanho dos cartões */
+    .movie-card {
+        min-width: 200px;
+        width: 200px;
+        height: 112px;
+    }
+
+    /* Título responsivo */
+    .slider-title {
+        font-size: 4vw;
+        line-height: 4.5vw;
+    }
+}
+
+/* ====================== RODAPÉ DE PÁGINA ===========================
+   Setor final com links e informações legais
+   ============================================================== */
+footer {
+    /* Padding igual ao da página */
+    padding: 0 4%;
+    /* Cor de texto mais escura */
+    color: #737373;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* Conteúdo do rodapé */
+.footer-content {
+    /* Limita largura máxima */
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* Parágrafo inicial no rodapé */
+.footer-content p {
+    margin-bottom: 30px;
+}
+
+/* ====================== LINKS DO RODAPÉ ===========================
+   Grid com múltiplos links em colunas
+   ============================================================== */
+.footer-links {
+    /* Remove estilo padrão de lista */
+    list-style: none;
+    /* Layout em grid */
+    display: grid;
+    /* 4 colunas em desktop */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* Styling dos links do rodapé */
+.footer-links a {
+    color: #737373;
+}
+
+/* Hover dos links do rodapé */
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* ====================== RODAPÉ RESPONSIVO =====================
+   Ajusta grid do rodapé para móvel
+   ============================================================== */
+@media (max-width: 768px) {
+    .footer-links {
+        /* 2 colunas em tablet/móvel */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
